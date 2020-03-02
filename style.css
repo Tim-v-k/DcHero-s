@@ -1,0 +1,165 @@
+body {
+    margin: 0px;
+    font-family: Arial;
+    background-image: url("../img/background/black.jpg");
+}
+
+#header{
+    background-color: #0282f9;
+    height: 100px;
+    padding: 20px 20px 20px;
+    position: relative;
+}
+
+#header-text{
+    color: white;
+    float: right;
+    padding-right: 1200px;
+    font-size: 40px;
+    position: relative;
+    bottom: 5px;
+    right: 20px;
+}
+
+#logo{
+    height: 100px;
+    width: 100px;
+}
+
+#main-container{
+    height: calc(100vh - 162px);
+}
+
+#main-left{
+    width: 300px;
+    height: 100%;
+    float: left;
+    overflow: auto;
+}
+
+#main-left li {
+    list-style-type: none;
+}
+
+.teams{
+    font-size: 30px;
+    color: white;
+    font-family: fantasy;
+}
+
+.teams-text{
+    margin: 10px;
+    color: white;
+}
+
+#main-center{
+    width: 550px;
+    height: 100%;
+    float: left;
+    overflow: auto;
+    background-color: gray;
+}
+
+.card-container{
+    width: 510px;
+    height: 210px;
+    background-color: black;
+    background-image: url("../img/background/header_bg.jpg");
+    margin: 10px;
+}
+
+.image-container{
+    width: 120px;
+    height: 210px;
+    float: left;
+}
+
+.image-size{
+    width: 120px;
+    height: 210px;
+}
+
+.text-card{
+    float: left;
+    margin-left: 10px;
+    color: white;
+    font-size: 15px;
+}
+
+.name-hero{
+    font-size: 30px;
+    color: blue;
+    font-family: fantasy;
+}
+
+.info-hero{
+    width: 350px;
+    word-wrap: break-word;
+}
+
+.more-info-hero{
+    text-align: center;
+    background-color: rgb(36, 16, 212);
+    width: 70px;
+    display: block;
+    Color: white;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.comments li{
+    list-style: none;
+}
+
+#main-right{
+    width: 669px;
+    height: 100%;
+    overflow: auto;
+    background-color: gray;
+}
+
+.stars{
+    text-align: center
+}
+
+.round-hero-image{
+    width: 150px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.hero-image{
+    text-align: center
+}
+
+.hero-info{
+    text-align: center
+}
+
+.hero-powers{
+    text-align: center
+}
+
+.textbox-size{
+    margin-left: 20px;
+    width: 300px;
+    height: 100px;
+}
+
+.leave-message{
+    margin-left: 20px;
+    font-size: 25px;
+}
+.input{
+    width: 100px;
+    height: 30px;
+}
+.input:hover{
+    width: 100px;
+    height: 30px;
+}
+
+.comments{
+    font-size: 15px;
+}
