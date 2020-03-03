@@ -54,7 +54,7 @@ function getHeroes($teamId = false)
     }
 
     // expand even more
-    $getHeroesSQL .=  " ORDER BY `characterName` ASC";
+    $getHeroesSQL .=  " ORDER BY `characterId` ASC";
 
     // preform $query on $con and store resourse
     $resourse = mysqli_query($connection, $getHeroesSQL) or die (mysqli_error($connection));

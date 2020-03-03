@@ -48,7 +48,7 @@ if(isset($_GET['characterId']))
 					foreach($teams as $key => $team)
 					{
 						?>
-						<li class="teams-text"><a href="index.php?teamId=<?php echo $team['teamId'];?>"><?php echo $team['teamName'];?></a></li>
+						<img src="<?php echo $team['teamImage'];?>" class="teamImage"><li class="teams-text"><a href="index.php?teamId=<?php echo $team['teamId'];?>"><?php echo $team['teamName'];?></a></li>
 						<?php
 					};
 					?>
@@ -76,7 +76,7 @@ if(isset($_GET['characterId']))
 
 		<div id="main-right">
 			<div class="stars">stars</div>
-			<div class="hero-image"><?php if(isset($character)){?><img src=" <?php echo $character['characterImage'];  ?>" class="round-hero-image"></div><?php } ?>
+			<div class="hero-image"><?php if(isset($character)){?><img src=" <?php echo $character['characterImage'];  ?>" class="round-hero-image"><?php } ?></div>
 			<div class="hero-info">
 				<h2>info</h2>
 				<?php if(isset($character)){ echo $character['characterDescription']; }?>
@@ -85,14 +85,14 @@ if(isset($_GET['characterId']))
 				<h2>powers</h2>	
 			</div>
 			<form>
+				<p class="leave-message">Write a Revieuw!</p>
 				<input class="textbox-size" type="text">
-				<p class="leave-message">Leave a Message</p>
+				<p class="leave-message">Revieuws from fans!</p>
 				<input class="input" type="submit" value="Submit">
 			</form>
 			<ul class="comments">
 				<li>
-				username:<br>
-				comment:
+				comments go here
 				</li>
 			</ul>
 		</div>
