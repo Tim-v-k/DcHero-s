@@ -54,7 +54,7 @@ function getHeroes($teamId = false)
     }
 
     // expand even more
-    $getHeroesSQL .=  " ORDER BY `characterName` ASC";
+    $getHeroesSQL .=  " ORDER BY `characterId` ASC";
 
     // preform $query on $con and store resourse
     $resourse = mysqli_query($connection, $getHeroesSQL) or die (mysqli_error($connection));
@@ -92,5 +92,41 @@ function getCharacter($characterId = false)
     
     $character = mysqli_fetch_assoc($resourse);
 
+    $character["Hero-Powers"] = getPowers($character["characterId"]);
+
+    /*
+    echo "<pre>";
+    var_dump($character);
+    echo "</pre>";
+
+    die("doei");
+    */
+
     return $character;
+}
+
+function getPowers($characterId)
+{
+    // connect to database
+    $connection = dBconnect();
+    // define an empty array to store teams
+    $power = array();
+    
+    // define the query to fetch the data from the database
+    $getpowerSQL = "
+    SELECT * FROM `characters` 
+    JOIN `characterproperties` ON `characters`.`characterId` = `characterproperties`.`characterId` 
+    JOIN `properties` ON `characterproperties`.`propertyId` = `properties`.`propertyId` 
+    WHERE `characters`.`characterId` = " . $characterId;
+    
+    // preform $query on $con and store resourse
+    $resourse = mysqli_query($connection, $getpowerSQL) or die (mysqli_error($connection));
+    
+    while($row = mysqli_fetch_assoc($resourse))
+    {
+        // add new items to $teams
+        $power[] = $row;
+    }
+
+    return $power;
 }
