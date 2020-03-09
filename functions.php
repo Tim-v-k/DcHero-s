@@ -54,14 +54,14 @@ function getHeroes($teamId = false)
     }
 
     // expand even more
-    $getHeroesSQL .=  " ORDER BY `characterName` ASC";
+    $getHeroesSQL .=  " ORDER BY `characterId` ASC";
 
     // preform $query on $con and store resourse
     $resourse = mysqli_query($connection, $getHeroesSQL) or die (mysqli_error($connection));
 
     while($row = mysqli_fetch_assoc($resourse))
     {
-        // add new items to $teams
+        // add new items to $heroes
         $heroes[] = $row;
     }
 
@@ -92,5 +92,102 @@ function getCharacter($characterId = false)
     
     $character = mysqli_fetch_assoc($resourse);
 
+    $character["Hero-Powers"] = getPowers($character["characterId"]);
+
     return $character;
+}
+
+function getPowers($characterId)
+{
+    // connect to database
+    $connection = dBconnect();
+    // define an empty array to store teams
+    $power = array();
+    
+    // define the query to fetch the data from the database
+    $getpowerSQL = "
+    SELECT * FROM `characters` 
+    JOIN `characterproperties` ON `characters`.`characterId` = `characterproperties`.`characterId` 
+    JOIN `properties` ON `characterproperties`.`propertyId` = `properties`.`propertyId` 
+    WHERE `characters`.`characterId` = " . $characterId;
+    
+    // preform $query on $con and store resourse
+    $resourse = mysqli_query($connection, $getpowerSQL) or die (mysqli_error($connection));
+    
+    while($row = mysqli_fetch_assoc($resourse))
+    {
+        // add new items to $power
+        $power[] = $row;
+    }
+
+    return $power;
+}
+
+function saveRating($characterId)
+{
+    // connect to database
+    $connection = dBconnect();
+    // define an empty array to store teams
+    $Rating = array();
+    
+    $ratingDate = date("Y-m-d H:i:s");
+
+    $ratingReview = $_POST["ratingReview"];
+    $ratingReview = trim($ratingReview); // will remove all white space at begining and end of variable
+    mysqli_real_escape_string($connection, $ratingReview); // will remove special text so we cant get hacked using mysql injection
+
+    $rating = $_POST["rating"];
+    $rating = trim($rating);
+    $rating = (int)$rating; //set to an int
+
+    $characterId = trim($characterId);
+    $characterId = (int)$characterId;
+
+    $userId = $_SESSION['userId'];
+    $userId = trim($userId); 
+    $userId = (int)$userId;
+
+    // define the query to put into the database 
+    $saveRatingSQL = "INSERT INTO `rating` (`ratingReview`,`rating`,`ratingDate`,`characterId`,`userId`) VALUES ('$ratingReview','$rating','$ratingDate','$characterId','$userId');
+    ";
+    
+    // preform $query on $con and store resourse
+    $resourse = mysqli_query($connection, $saveRatingSQL) or die (mysqli_error($connection));
+}
+
+function getRating($characterId)
+{
+    // connect to database
+    $connection = dBconnect();
+    // define an empty array to store teams
+    $Rating = array();
+    
+    // define the query to fetch the data from the database
+    $getRatingSQL = "
+    SELECT * FROM `rating` WHERE `characterId` = " . $characterId;
+    ;
+    
+    // preform $query on $con and store resourse
+    $resourse = mysqli_query($connection, $getRatingSQL) or die (mysqli_error($connection));
+    
+    while($row = mysqli_fetch_assoc($resourse))
+    {
+        // add new items to $rating
+        $Rating[] = $row;
+    }
+
+    return $Rating;
+}
+
+function getAvarageRating($characterId)
+{
+    // connect to database
+    $connection = dBconnect();
+
+    $getAvarageRatingSQL = "
+    SELECT AVG(`rating`) AS stars FROM `rating` WHERE `characterId` = " . $characterId;
+
+    $resourse = mysqli_query($connection, $getAvarageRatingSQL) or die (mysqli_error($connection));
+    
+    return mysqli_fetch_assoc($resourse);
 }
